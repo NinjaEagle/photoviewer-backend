@@ -3,10 +3,10 @@ class ImagesController < ApplicationController
     # GET /images
     # GET /images.json
     def index
-        @images = Image.paginate(:page => params [:page])
+        @images = Image.paginate(page: params[:page], per_page: 10)
         render json: {
             images: @images,
-            page: @images.current_page #returns an integer corresponding to current page
+            page: @images.current_page, #returns an integer corresponding to current page
             pages: @images.total_pages #returns an integer corresponding to total page count
         }
     end
@@ -57,9 +57,8 @@ class ImagesController < ApplicationController
     end
 
     private
+
     def image_params
-    
+        params.require(:image).permit! 
     end
-
-
 end
