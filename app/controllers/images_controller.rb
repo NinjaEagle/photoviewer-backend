@@ -10,6 +10,14 @@ class ImagesController < ApplicationController
             pages: @images.total_pages #returns an integer corresponding to total page count
         }
     end
+
+    def get_All_Pictures
+        @images = Image.all
+        render json: {
+            images: @images
+        }
+    end
+
     # GET /images/1
     # GET /images/1.json
     def show
